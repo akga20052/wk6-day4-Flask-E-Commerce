@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 style="text-align:center; margin:4.5rem 0 2rem 0; font-weight:500; text-shadow:0 0 0.1em rgb(255, 255, 255)">MAKE ADMIN:</h1>
+<div>
+     <form method="POST" class="container col-4">
+         {{ form.hidden_tag() }}
+         {{form2.username(style="margin-top:1rem", class='form-control', placeholder='username')}}
+         {{form2.submitadmin(style="margin-top:1rem", value="Make Admin")}}
+     </form>
+</div>
+<h1 style="text-align:center; margin:2rem 0; font-weight:500; text-shadow:0 0 0.1em rgb(255, 255, 255)">ADD PRODUCT TO DATABASE:</h1>
+   <div>
+        <form method="POST" class="container col-4">
+            {{ form.hidden_tag() }}
+            {{form.title(style="margin-top:1rem", class='form-control', placeholder='title')}}
+            {{form.img_url(style="margin-top:1rem", class='form-control', placeholder='img url')}}
+            {{form.caption(style="margin-top:1rem", class='form-control', placeholder='caption')}}
+            {{form.price(style="margin-top:1rem", class='form-control', placeholder='price')}}
+            {{form.quantity(style="margin-top:1rem", class='form-control', placeholder='quantity')}}
+            {{form.submit(style="margin-top:1rem", value="Add to DB")}}
+        </form>
+   </div>
+   <h1 style="text-align:center; margin:2rem 0; font-weight:500; text-shadow:0 0 0.1em rgb(255, 255, 255)">INVENTORY:</h1>
+   <div class="d-flex justify-content-center flex-wrap">
+
+    {% for mug in mugs %}
+        <div class="card" style="width: 18rem; margin:1rem; border: 1px solid black">
+            <a class="text-dark text-decoration-none" href="{{ url_for('getcookies', cookies_id=cookies.id) }}">
+            <img style="width:80%; margin: 0 auto; padding-left: 3rem" src="{{/}}" class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.title }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item"></li>
+            <li class="list-group-item">{{ product.caption }}</li>
+            <li class="list-group-item"><strong>Price:</strong> ${{ product.price }}</li>
+            <li class="list-group-item">Stock: {{product.quantity}}</li>
+            </ul></a>
+            <div class="card-body">
+                <button type="button" class="btn btn-danger btn-sm">
+                    <a href="/{{/}}/delete" class="card-link" style="color: white; text-decoration: none">Delete From Inventory</a>
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+   
+{% endblock %}
